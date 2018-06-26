@@ -4362,7 +4362,13 @@ static void *TableContentKVOContext = &TableContentKVOContext;
 			[cell setTextColor:rowIndex == [tableContentView selectedRow] ? whiteColor : lightGrayColor];
 		}
 		else {
-			[cell setTextColor:blackColor];
+			NSString *osxMode = [[NSUserDefaults standardUserDefaults] stringForKey:@"AppleInterfaceStyle"];
+
+			if ([osxMode isEqualToString:@"Dark"]) {
+				[cell setTextColor:whiteColor];
+			} else {
+				[cell setTextColor:blackColor];
+			}
 
 			if ([self cellValueIsDisplayedAsHexForColumn:[[tableColumn identifier] integerValue]]) {
 				[cell setTextColor:rowIndex == [tableContentView selectedRow] ? whiteColor : blueColor];
